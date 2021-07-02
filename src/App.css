@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+}
+
+.box-a {
+  z-index: 9;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
