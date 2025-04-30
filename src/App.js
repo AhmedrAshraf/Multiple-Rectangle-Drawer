@@ -32,17 +32,23 @@ function App() {
     let array = [...rectangle];
     let color = Konva.Util.getRandomColor();
     if (firstClick) {
-      let w = clientX - x;
-      let h = clientY - y;
+      // Calculate width and height as absolute values
+      let width = Math.abs(clientX - x);
+      let height = Math.abs(clientY - y);
+      
+      // Calculate the actual x and y coordinates based on the direction of drawing
+      let actualX = Math.min(x, clientX);
+      let actualY = Math.min(y, clientY);
+
       // Ensure minimum size
-      if (Math.abs(w) > 10 && Math.abs(h) > 10) {
+      if (width > 10 && height > 10) {
         array.push({ 
-          x, 
-          y, 
-          width: w, 
-          height: h, 
+          x: actualX, 
+          y: actualY, 
+          width, 
+          height, 
           color: col,
-          rotation: Math.random() * 5 - 2.5, // Random slight rotation
+          rotation: Math.random() * 5 - 2.5,
           scale: 1,
           opacity: 0.7
         });
@@ -61,15 +67,21 @@ function App() {
   function handleMove({ clientX, clientY }) {
     let array = [...rectangle];
     if (firstClick) {
-      let w = clientX - x;
-      let h = clientY - y;
+      // Calculate width and height as absolute values
+      let width = Math.abs(clientX - x);
+      let height = Math.abs(clientY - y);
+      
+      // Calculate the actual x and y coordinates based on the direction of drawing
+      let actualX = Math.min(x, clientX);
+      let actualY = Math.min(y, clientY);
+
       let idx = array.length ? array.length - 1 : 0;
       array[idx] = { 
         color: col, 
-        height: h, 
-        width: w, 
-        x, 
-        y,
+        height, 
+        width, 
+        x: actualX, 
+        y: actualY,
         rotation: Math.random() * 5 - 2.5,
         scale: 1,
         opacity: 0.7
