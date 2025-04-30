@@ -12,7 +12,6 @@ A lightweight, interactive React application that allows users to draw rectangle
 
 ## 🧪 Demo
 
-> _[Optional: Add a link or screenshot GIF here showing how the rectangle drawing works]_  
 
 ## 🛠️ Getting Started
 
