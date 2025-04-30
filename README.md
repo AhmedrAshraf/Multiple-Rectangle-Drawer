@@ -12,8 +12,10 @@ A lightweight, interactive React application that allows users to draw rectangle
 
 ## 🧪 Demo
 
+ 
 
 ## 🛠️ Getting Started
+
 
 ### 1. Clone the Repo
 
