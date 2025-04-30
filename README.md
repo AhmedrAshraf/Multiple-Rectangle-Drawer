@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# 🟦 Rectangle Drawing App (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A lightweight, interactive React application that allows users to draw rectangles anywhere on the screen by simply clicking and dragging. Ideal for image annotation, design mockups, or UI testing tools.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- 🖱️ Click-and-drag to draw rectangles  
+- 📦 Built using React (Hooks & functional components)  
+- 🔄 Real-time rendering while dragging  
+- ♻️ Customizable rectangle properties (coming soon)  
+- 🧰 Minimal dependencies, easy to extend
 
-### `yarn start`
+## 🧪 Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> _[Optional: Add a link or screenshot GIF here showing how the rectangle drawing works]_  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🛠️ Getting Started
 
-### `yarn test`
+### 1. Clone the Repo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/your-username/react-rectangle-drawer.git
+cd react-rectangle-drawer
+```
 
-### `yarn build`
+### 2. Install Dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+# or
+yarn install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Start the App
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+# or
+yarn start
+```
 
-### `yarn eject`
+The app will run at `http://localhost:3000`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🧱 Basic Usage
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Click anywhere on the canvas to start drawing
+- Drag to define the size of the rectangle
+- Release the mouse to finish drawing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+All rectangles are rendered live and stored in memory.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🧩 Project Structure
 
-## Learn More
+```plaintext
+src/
+├── components/
+│   └── RectangleCanvas.tsx     # Main drawing logic
+├── App.tsx                     # Entry component
+├── index.tsx                   # React DOM mount
+└── styles.css                  # Basic styling
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔮 Planned Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Resize or move rectangles
+- Save drawn data to backend
+- Add labels/tags to rectangles
+- Export data (JSON/CSV)
 
-### Code Splitting
+## 🧑‍💻 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feel free to fork this repo, improve it, and submit PRs!
