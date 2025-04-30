@@ -2,6 +2,7 @@ import "./App.css";
 import Konva from "konva";
 import React, { useState, useEffect } from "react";
 import { Stage, Layer, Rect, Group, Text } from "react-konva";
+import Contribute from "./components/Contribute";
 
 function App() {
   const [x, setx] = useState(0);
@@ -99,7 +100,9 @@ function App() {
   }
 
   return (
+    
     <div className="App">
+        <Contribute/>
       <div className="controls">
         <h1>Rectangle Drawer</h1>
         <p>Click and drag to draw rectangles. Press ESC to clear.</p>

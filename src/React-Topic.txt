@@ -1,0 +1,90 @@
+Beginner Topics
+JSX Syntax
+
+React Components (Functional vs Class)
+
+Props
+
+State
+
+Event Handling
+
+Conditional Rendering
+
+Lists and Keys
+
+Basic Forms and Inputs
+
+Component Lifecycle (Class Components)
+
+🟡 Intermediate Topics
+Hooks:
+
+useState
+
+useEffect
+
+useRef
+
+useContext
+
+Context API
+
+React Router (v6+)
+
+Lifting State Up
+
+Prop Drilling
+
+Controlled vs Uncontrolled Components
+
+Custom Hooks
+
+Error Boundaries
+
+🔵 Advanced Topics
+useReducer
+
+React Performance Optimization
+
+React.memo
+
+useCallback
+
+useMemo
+
+Code Splitting / Lazy Loading (React.lazy, Suspense)
+
+Refs and Forward Refs
+
+Portals
+
+Higher-Order Components (HOCs)
+
+Render Props
+
+Server-Side Rendering (SSR)
+
+Static Site Generation (Next.js)
+
+🧪 Testing
+Jest
+
+React Testing Library
+
+End-to-End Testing (e.g., Cypress, Playwright)
+
+📦 Ecosystem & Tooling
+Redux / Zustand / Jotai / Recoil
+
+Next.js / Remix (Full-stack frameworks)
+
+TypeScript with React
+
+React Query / SWR
+
+Vite / Webpack
+
+ESLint / Prettier / Husky
+
+ This is Anazubg
