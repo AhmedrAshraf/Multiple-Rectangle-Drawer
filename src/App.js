@@ -1,7 +1,7 @@
 import "./App.css";
 import Konva from "konva";
-import React, { useState } from "react";
-import { Stage, Layer, Rect, Group } from "react-konva";
+import React, { useState, useEffect } from "react";
+import { Stage, Layer, Rect, Group, Text } from "react-konva";
 
 function App() {
   const [x, setx] = useState(0);
@@ -9,6 +9,24 @@ function App() {
   const [col, setCol] = useState("");
   const [rectangle, setRectangle] = useState([]);
   const [firstClick, setFirstClick] = useState(false);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [hoveredRect, setHoveredRect] = useState(null);
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Escape') {
+        clearRectangles();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  function clearRectangles() {
+    setRectangle([]);
+    setFirstClick(false);
+  }
 
   function handleClick({ clientX, clientY }) {
     let array = [...rectangle];
@@ -16,14 +34,28 @@ function App() {
     if (firstClick) {
       let w = clientX - x;
       let h = clientY - y;
-      array.push({ x, y, width: w, height: h, color: col });
+      // Ensure minimum size
+      if (Math.abs(w) > 10 && Math.abs(h) > 10) {
+        array.push({ 
+          x, 
+          y, 
+          width: w, 
+          height: h, 
+          color: col,
+          rotation: Math.random() * 5 - 2.5, // Random slight rotation
+          scale: 1,
+          opacity: 0.7
+        });
+      }
     } else {
       setx(clientX);
       sety(clientY);
       setCol(color);
+      setIsDrawing(true);
     }
     setFirstClick(!firstClick);
     setRectangle(array);
+    if (!firstClick) setIsDrawing(false);
   }
 
   function handleMove({ clientX, clientY }) {
@@ -32,13 +64,38 @@ function App() {
       let w = clientX - x;
       let h = clientY - y;
       let idx = array.length ? array.length - 1 : 0;
-      array[idx] = { color: col, height: h, width: w, x, y };
+      array[idx] = { 
+        color: col, 
+        height: h, 
+        width: w, 
+        x, 
+        y,
+        rotation: Math.random() * 5 - 2.5,
+        scale: 1,
+        opacity: 0.7
+      };
     }
     setRectangle(array);
   }
 
+  function handleRectHover(index) {
+    setHoveredRect(index);
+  }
+
+  function handleRectLeave() {
+    setHoveredRect(null);
+  }
+
   return (
     <div className="App">
+      <div className="controls">
+        <h1>Rectangle Drawer</h1>
+        <p>Click and drag to draw rectangles. Press ESC to clear.</p>
+        <div className="stats">
+          <span>Rectangles: {rectangle.length}</span>
+          <button onClick={clearRectangles}>Clear All</button>
+        </div>
+      </div>
       <Stage
         width={window.innerWidth}
         height={window.innerHeight}
@@ -46,23 +103,46 @@ function App() {
       >
         <Layer>
           {!!rectangle?.length &&
-            rectangle.map((e) => {
+            rectangle.map((e, index) => {
               return (
-                <Group x={e.x} y={e.y}>
+                <Group 
+                  key={index} 
+                  x={e.x} 
+                  y={e.y}
+                  rotation={e.rotation}
+                  scaleX={hoveredRect === index ? 1.05 : e.scale}
+                  scaleY={hoveredRect === index ? 1.05 : e.scale}
+                  onMouseEnter={() => handleRectHover(index)}
+                  onMouseLeave={handleRectLeave}
+                >
                   <Rect
                     noise={1}
-                    opacity={0.5}
+                    opacity={hoveredRect === index ? 0.9 : e.opacity}
                     stroke="black"
-                    shadowBlur={1}
+                    shadowBlur={hoveredRect === index ? 10 : 5}
+                    shadowColor="rgba(0,0,0,0.3)"
                     fill={e.color}
                     width={e.width}
                     strokeWidth={1}
                     height={e.height}
                     filters={[Konva.Filters.Noise]}
+                    cornerRadius={8}
+                    shadowOffset={{ x: 0, y: 2 }}
                   />
                 </Group>
               );
             })}
+          {isDrawing && (
+            <Text
+              text="Drawing..."
+              x={10}
+              y={10}
+              fontSize={16}
+              fill="#666"
+              shadowColor="white"
+              shadowBlur={5}
+            />
+          )}
         </Layer>
       </Stage>
       <div
