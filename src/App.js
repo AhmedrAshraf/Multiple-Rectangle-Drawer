@@ -35,18 +35,18 @@ function App() {
       // Calculate width and height as absolute values
       let width = Math.abs(clientX - x);
       let height = Math.abs(clientY - y);
-      
+
       // Calculate the actual x and y coordinates based on the direction of drawing
       let actualX = Math.min(x, clientX);
       let actualY = Math.min(y, clientY);
 
       // Ensure minimum size
       if (width > 10 && height > 10) {
-        array.push({ 
-          x: actualX, 
-          y: actualY, 
-          width, 
-          height, 
+        array.push({
+          x: actualX,
+          y: actualY,
+          width,
+          height,
           color: col,
           rotation: Math.random() * 5 - 2.5,
           scale: 1,
@@ -70,17 +70,17 @@ function App() {
       // Calculate width and height as absolute values
       let width = Math.abs(clientX - x);
       let height = Math.abs(clientY - y);
-      
+
       // Calculate the actual x and y coordinates based on the direction of drawing
       let actualX = Math.min(x, clientX);
       let actualY = Math.min(y, clientY);
 
       let idx = array.length ? array.length - 1 : 0;
-      array[idx] = { 
-        color: col, 
-        height, 
-        width, 
-        x: actualX, 
+      array[idx] = {
+        color: col,
+        height,
+        width,
+        x: actualX,
         y: actualY,
         rotation: Math.random() * 5 - 2.5,
         scale: 1,
@@ -97,6 +97,18 @@ function App() {
   function handleRectLeave() {
     setHoveredRect(null);
   }
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  
+    const button = document.querySelector('.dark-toggle-btn');
+    if (document.body.classList.contains("dark-mode")) {
+      button.innerHTML = "🌙 Dark Mode";
+    } else {
+      button.innerHTML = "☀️ Dark Mode";
+    }
+  }
+  
+
 
   return (
     <div className="App">
@@ -107,6 +119,10 @@ function App() {
           <span>Rectangles: {rectangle.length}</span>
           <button onClick={clearRectangles}>Clear All</button>
         </div>
+        <button onClick={toggleDarkMode} className="dark-toggle-btn">
+          {document.body.classList.contains("dark-mode") ? "🌙" : "☀️"}Dark Mode
+        </button>
+
       </div>
       <Stage
         width={window.innerWidth}
@@ -117,9 +133,9 @@ function App() {
           {!!rectangle?.length &&
             rectangle.map((e, index) => {
               return (
-                <Group 
-                  key={index} 
-                  x={e.x} 
+                <Group
+                  key={index}
+                  x={e.x}
                   y={e.y}
                   rotation={e.rotation}
                   scaleX={hoveredRect === index ? 1.05 : e.scale}
@@ -162,6 +178,7 @@ function App() {
         onClick={handleClick}
         onMouseMove={handleMove}
       ></div>
+
     </div>
   );
 }

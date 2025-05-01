@@ -117,3 +117,49 @@
   transform: scale(1.02) translateY(-2px);
   filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15)) brightness(1.1);
 }
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode .controls {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border-bottom: 1px solid #333;
+}
+
+.dark-toggle-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #333;
+  color: #f1f1f1;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.dark-toggle-btn:hover {
+  background: #444;
+}
+
+/* Add a moon transition effect */
+body.dark-mode .dark-toggle-btn {
+  animation: moonAnimation 0.5s ease-in-out;
+}
+
+@keyframes moonAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
