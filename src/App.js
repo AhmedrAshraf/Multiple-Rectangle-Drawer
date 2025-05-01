@@ -6,7 +6,7 @@ import { Stage, Layer, Rect, Group, Text } from "react-konva";
 function App() {
   const [x, setx] = useState(0);
   const [y, sety] = useState(0);
-  const [col, setCol] = useState("");
+  const [col, setCol] = useState("#ff0000"); // default color
   const [rectangle, setRectangle] = useState([]);
   const [firstClick, setFirstClick] = useState(false);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -30,17 +30,12 @@ function App() {
 
   function handleClick({ clientX, clientY }) {
     let array = [...rectangle];
-    let color = Konva.Util.getRandomColor();
     if (firstClick) {
-      // Calculate width and height as absolute values
       let width = Math.abs(clientX - x);
       let height = Math.abs(clientY - y);
-
-      // Calculate the actual x and y coordinates based on the direction of drawing
       let actualX = Math.min(x, clientX);
       let actualY = Math.min(y, clientY);
 
-      // Ensure minimum size
       if (width > 10 && height > 10) {
         array.push({
           x: actualX,
@@ -56,7 +51,6 @@ function App() {
     } else {
       setx(clientX);
       sety(clientY);
-      setCol(color);
       setIsDrawing(true);
     }
     setFirstClick(!firstClick);
@@ -67,11 +61,8 @@ function App() {
   function handleMove({ clientX, clientY }) {
     let array = [...rectangle];
     if (firstClick) {
-      // Calculate width and height as absolute values
       let width = Math.abs(clientX - x);
       let height = Math.abs(clientY - y);
-
-      // Calculate the actual x and y coordinates based on the direction of drawing
       let actualX = Math.min(x, clientX);
       let actualY = Math.min(y, clientY);
 
@@ -97,9 +88,10 @@ function App() {
   function handleRectLeave() {
     setHoveredRect(null);
   }
+
   function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
-  
+
     const button = document.querySelector('.dark-toggle-btn');
     if (document.body.classList.contains("dark-mode")) {
       button.innerHTML = "🌙 Dark Mode";
@@ -107,8 +99,6 @@ function App() {
       button.innerHTML = "☀️ Dark Mode";
     }
   }
-  
-
 
   return (
     <div className="App">
@@ -119,11 +109,22 @@ function App() {
           <span>Rectangles: {rectangle.length}</span>
           <button onClick={clearRectangles}>Clear All</button>
         </div>
-        <button onClick={toggleDarkMode} className="dark-toggle-btn">
-          {document.body.classList.contains("dark-mode") ? "🌙" : "☀️"}Dark Mode
-        </button>
 
+        <div className="color-picker">
+          <label htmlFor="color">Pick a color:</label>
+          <input
+            id="color"
+            type="color"
+            value={col}
+            onChange={(e) => setCol(e.target.value)}
+          />
+        </div>
+
+        <button onClick={toggleDarkMode} className="dark-toggle-btn">
+          {document.body.classList.contains("dark-mode") ? "🌙" : "☀️"} Dark Mode
+        </button>
       </div>
+
       <Stage
         width={window.innerWidth}
         height={window.innerHeight}
@@ -131,35 +132,33 @@ function App() {
       >
         <Layer>
           {!!rectangle?.length &&
-            rectangle.map((e, index) => {
-              return (
-                <Group
-                  key={index}
-                  x={e.x}
-                  y={e.y}
-                  rotation={e.rotation}
-                  scaleX={hoveredRect === index ? 1.05 : e.scale}
-                  scaleY={hoveredRect === index ? 1.05 : e.scale}
-                  onMouseEnter={() => handleRectHover(index)}
-                  onMouseLeave={handleRectLeave}
-                >
-                  <Rect
-                    noise={1}
-                    opacity={hoveredRect === index ? 0.9 : e.opacity}
-                    stroke="black"
-                    shadowBlur={hoveredRect === index ? 10 : 5}
-                    shadowColor="rgba(0,0,0,0.3)"
-                    fill={e.color}
-                    width={e.width}
-                    strokeWidth={1}
-                    height={e.height}
-                    filters={[Konva.Filters.Noise]}
-                    cornerRadius={8}
-                    shadowOffset={{ x: 0, y: 2 }}
-                  />
-                </Group>
-              );
-            })}
+            rectangle.map((e, index) => (
+              <Group
+                key={index}
+                x={e.x}
+                y={e.y}
+                rotation={e.rotation}
+                scaleX={hoveredRect === index ? 1.05 : e.scale}
+                scaleY={hoveredRect === index ? 1.05 : e.scale}
+                onMouseEnter={() => handleRectHover(index)}
+                onMouseLeave={handleRectLeave}
+              >
+                <Rect
+                  noise={1}
+                  opacity={hoveredRect === index ? 0.9 : e.opacity}
+                  stroke="black"
+                  shadowBlur={hoveredRect === index ? 10 : 5}
+                  shadowColor="rgba(0,0,0,0.3)"
+                  fill={e.color}
+                  width={e.width}
+                  strokeWidth={1}
+                  height={e.height}
+                  filters={[Konva.Filters.Noise]}
+                  cornerRadius={8}
+                  shadowOffset={{ x: 0, y: 2 }}
+                />
+              </Group>
+            ))}
           {isDrawing && (
             <Text
               text="Drawing..."
@@ -173,12 +172,12 @@ function App() {
           )}
         </Layer>
       </Stage>
+
       <div
         className="box box-a"
         onClick={handleClick}
         onMouseMove={handleMove}
       ></div>
-
     </div>
   );
 }

@@ -163,3 +163,15 @@ body.dark-mode .dark-toggle-btn {
     transform: rotate(360deg);
   }
 }
+
+ 
+/* color picker  */
+
+.color-picker {
+  margin: 10px 0;
+}
+
+.color-picker label {
+  margin-right: 8px;
+}
+
