@@ -7,18 +7,23 @@
 }
 
 .controls {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 10;
   background: rgba(255, 255, 255, 0.95);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(251, 186, 186, 0.05);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   animation: slideIn 0.5s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 @keyframes slideIn {
@@ -33,9 +38,9 @@
 }
 
 .controls h1 {
-  margin: 0 0 10px 0;
+  margin: 0 ;
   color: #2c3e50;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
   background: linear-gradient(45deg, #2c3e50, #3498db);
   -webkit-background-clip: text;
@@ -43,7 +48,7 @@
 }
 
 .controls p {
-  margin: 0 0 20px 0;
+  margin: 0 ;
   color: #666;
   font-size: 14px;
   line-height: 1.5;
@@ -52,7 +57,7 @@
 .stats {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .stats span {
@@ -144,6 +149,7 @@ body {
   cursor: pointer;
   font-size: 14px;
   transition: background 0.3s ease;
+  margin: 0;
 }
 
 .dark-toggle-btn:hover {

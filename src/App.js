@@ -113,8 +113,10 @@ function App() {
   return (
     <div className="App">
       <div className="controls">
-        <h1>Rectangle Drawer</h1>
-        <p>Click and drag to draw rectangles. Press C to clear.</p>
+        <div>
+          <h1>Rectangle Drawer</h1>
+          <p>Click and drag to draw rectangles. Press C to clear.</p>
+        </div>
         <div className="stats">
           <span>Rectangles: {rectangle.length}</span>
           <button onClick={clearRectangles}>Clear All</button>
