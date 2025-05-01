@@ -1,6 +1,6 @@
 import "./App.css";
 import Konva from "konva";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { Stage, Layer, Rect, Group, Text } from "react-konva";
 
 function App() {
@@ -107,8 +107,19 @@ function App() {
       button.innerHTML = "☀️ Dark Mode";
     }
   }
-  
+  const stageRef = useRef(null);
 
+  function handleSave() {
+    const uri = stageRef.current.toDataURL({ pixelRatio: 2 });
+    const link = document.createElement("a");
+    link.download = "drawing.png";
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+  
+  
 
   return (
     <div className="App">
@@ -119,16 +130,25 @@ function App() {
           <span>Rectangles: {rectangle.length}</span>
           <button onClick={clearRectangles}>Clear All</button>
         </div>
-        <button onClick={toggleDarkMode} className="dark-toggle-btn">
-          {document.body.classList.contains("dark-mode") ? "🌙" : "☀️"}Dark Mode
-        </button>
+        <div className="flex flex-row">
+  <button onClick={toggleDarkMode} className="dark-toggle-btn mr-4">
+    {document.body.classList.contains("dark-mode") ? "🌙" : "☀️"} Dark Mode
+  </button>
+
+  <button onClick={handleSave} className="dark-toggle-btn">
+    Save Drawing
+  </button>
+</div>
+
 
       </div>
       <Stage
-        width={window.innerWidth}
-        height={window.innerHeight}
-        style={{ position: "absolute", top: 0, left: 0, zIndex: 3 }}
-      >
+  ref={stageRef}
+  width={window.innerWidth}
+  height={window.innerHeight}
+  style={{ position: "absolute", top: 0, left: 0, zIndex: 3 }}
+>
+
         <Layer>
           {!!rectangle?.length &&
             rectangle.map((e, index) => {
@@ -178,6 +198,7 @@ function App() {
         onClick={handleClick}
         onMouseMove={handleMove}
       ></div>
+
 
     </div>
   );
