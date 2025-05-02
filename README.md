@@ -20,7 +20,7 @@ A lightweight, interactive React application that allows users to draw rectangle
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/AhmedrAshraf/React-Rectangle-Drawer.git
+git clone https://github.com/AhmedrAshraf/Multiple-Rectangle-Drawer.git
 cd react-rectangle-drawer
 ```
 
